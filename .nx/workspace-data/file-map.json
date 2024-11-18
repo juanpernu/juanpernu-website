@@ -1,0 +1,277 @@
+{
+  "version": "6.0",
+  "nxVersion": "20.1.2",
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": ".gitignore",
+        "hash": "3248670787846333476"
+      },
+      {
+        "file": "package.json",
+        "hash": "15634311275497887184"
+      },
+      {
+        "file": "nx.json",
+        "hash": "1921754567074770008"
+      },
+      {
+        "file": "lerna.json",
+        "hash": "1841662996297644301"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "4875228188038577568"
+      }
+    ],
+    "projectFileMap": {
+      "juanpernu-website": [
+        {
+          "file": "packages/website/.eslintrc.json",
+          "hash": "1233932023607832390"
+        },
+        {
+          "file": "packages/website/.gitignore",
+          "hash": "14520772958207174873"
+        },
+        {
+          "file": "packages/website/README.md",
+          "hash": "10766794746169900117"
+        },
+        {
+          "file": "packages/website/components.json",
+          "hash": "3952401632042971669"
+        },
+        {
+          "file": "packages/website/next-env.d.ts",
+          "hash": "13904763933831424769"
+        },
+        {
+          "file": "packages/website/next.config.ts",
+          "hash": "2392922978957993090"
+        },
+        {
+          "file": "packages/website/package.json",
+          "hash": "9624152507612692911",
+          "deps": [
+            "npm:@types/node",
+            "npm:@types/react",
+            "npm:@types/react-dom",
+            "npm:eslint@8.57.1",
+            "npm:eslint-config-next",
+            "npm:postcss",
+            "npm:tailwindcss",
+            "npm:typescript",
+            "@juanpernu/ui",
+            "npm:@radix-ui/react-separator",
+            "npm:@radix-ui/react-slot",
+            "npm:@radix-ui/react-toggle",
+            "npm:@radix-ui/react-tooltip",
+            "npm:class-variance-authority",
+            "npm:clsx",
+            "npm:framer-motion",
+            "npm:lucide-react",
+            "npm:next",
+            "npm:react",
+            "npm:react-dom",
+            "npm:tailwind-merge",
+            "npm:tailwindcss-animate"
+          ]
+        },
+        {
+          "file": "packages/website/postcss.config.mjs",
+          "hash": "2557392112968376575"
+        },
+        {
+          "file": "packages/website/public/file.svg",
+          "hash": "15617830351863523835"
+        },
+        {
+          "file": "packages/website/public/globe.svg",
+          "hash": "9134466864871335697"
+        },
+        {
+          "file": "packages/website/public/next.svg",
+          "hash": "8300767200008744458"
+        },
+        {
+          "file": "packages/website/public/vercel.svg",
+          "hash": "3007623926711696394"
+        },
+        {
+          "file": "packages/website/public/window.svg",
+          "hash": "16677869292061012332"
+        },
+        {
+          "file": "packages/website/src/app/favicon.ico",
+          "hash": "9157999678830540297"
+        },
+        {
+          "file": "packages/website/src/app/fonts/GeistMonoVF.woff",
+          "hash": "17799230542345324615"
+        },
+        {
+          "file": "packages/website/src/app/fonts/GeistVF.woff",
+          "hash": "6578897518916770501"
+        },
+        {
+          "file": "packages/website/src/app/globals.css",
+          "hash": "15132252532800324433"
+        },
+        {
+          "file": "packages/website/src/app/layout.tsx",
+          "hash": "8410215865742501271"
+        },
+        {
+          "file": "packages/website/src/app/page.tsx",
+          "hash": "3306042126904601285"
+        },
+        {
+          "file": "packages/website/src/components/background.tsx",
+          "hash": "9726412137233165936"
+        },
+        {
+          "file": "packages/website/src/components/dock.tsx",
+          "hash": "13003974850700654003"
+        },
+        {
+          "file": "packages/website/src/lib/utils.ts",
+          "hash": "6483145186850064023"
+        },
+        {
+          "file": "packages/website/tailwind.config.ts",
+          "hash": "1803077050884279987"
+        },
+        {
+          "file": "packages/website/tsconfig.json",
+          "hash": "4965826641429490352"
+        }
+      ],
+      "@juanpernu/ui": [
+        {
+          "file": "packages/ui/.gitignore",
+          "hash": "13046175384202504187"
+        },
+        {
+          "file": "packages/ui/README.md",
+          "hash": "5222898940979069107"
+        },
+        {
+          "file": "packages/ui/components.json",
+          "hash": "15781957037620004850"
+        },
+        {
+          "file": "packages/ui/eslint.config.js",
+          "hash": "16145672096969245511"
+        },
+        {
+          "file": "packages/ui/index.html",
+          "hash": "4025202329384162906"
+        },
+        {
+          "file": "packages/ui/package.json",
+          "hash": "11913391545901621827",
+          "deps": [
+            "npm:@eslint/js",
+            "npm:@types/node@22.9.0",
+            "npm:@types/react",
+            "npm:@types/react-dom",
+            "npm:@vitejs/plugin-react",
+            "npm:autoprefixer",
+            "npm:eslint",
+            "npm:eslint-plugin-react-hooks",
+            "npm:eslint-plugin-react-refresh",
+            "npm:globals",
+            "npm:postcss",
+            "npm:postcss-cli",
+            "npm:tailwindcss",
+            "npm:typescript",
+            "npm:typescript-eslint",
+            "npm:vite",
+            "npm:vite-plugin-dts",
+            "npm:@radix-ui/react-separator",
+            "npm:@radix-ui/react-slot",
+            "npm:@radix-ui/react-toggle",
+            "npm:@radix-ui/react-tooltip",
+            "npm:class-variance-authority",
+            "npm:clsx",
+            "npm:framer-motion",
+            "npm:lucide-react@0.460.0",
+            "npm:react",
+            "npm:react-dom",
+            "npm:tailwind-merge",
+            "npm:tailwindcss-animate"
+          ]
+        },
+        {
+          "file": "packages/ui/postcss.config.js",
+          "hash": "1121830044826443979"
+        },
+        {
+          "file": "packages/ui/public/vite.svg",
+          "hash": "16046085400642193116"
+        },
+        {
+          "file": "packages/ui/src/components/ui/button.tsx",
+          "hash": "206097653567384615"
+        },
+        {
+          "file": "packages/ui/src/components/ui/dock.tsx",
+          "hash": "10512781587852378895"
+        },
+        {
+          "file": "packages/ui/src/components/ui/dot-pattern.tsx",
+          "hash": "997148267745800501"
+        },
+        {
+          "file": "packages/ui/src/components/ui/separator.tsx",
+          "hash": "4253199637959649345"
+        },
+        {
+          "file": "packages/ui/src/components/ui/toggle.tsx",
+          "hash": "11922448946032609478"
+        },
+        {
+          "file": "packages/ui/src/components/ui/tooltip.tsx",
+          "hash": "10536957084875232793"
+        },
+        {
+          "file": "packages/ui/src/index.css",
+          "hash": "622075343670352715"
+        },
+        {
+          "file": "packages/ui/src/index.ts",
+          "hash": "11453965383731459828"
+        },
+        {
+          "file": "packages/ui/src/lib/utils.ts",
+          "hash": "6483145186850064023"
+        },
+        {
+          "file": "packages/ui/tailwind.config.js",
+          "hash": "4082793931348722490"
+        },
+        {
+          "file": "packages/ui/tsconfig.json",
+          "hash": "6719263641360662521"
+        },
+        {
+          "file": "packages/ui/vite.config.ts",
+          "hash": "16442572091012269450"
+        }
+      ],
+      ".vercel": [
+        {
+          "file": "packages/website/.vercel/README.txt",
+          "hash": "14131471887446248118"
+        },
+        {
+          "file": "packages/website/.vercel/project.json",
+          "hash": "7769507086917180842"
+        }
+      ]
+    }
+  }
+}
