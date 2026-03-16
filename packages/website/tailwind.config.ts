@@ -7,6 +7,14 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      short: { raw: "(min-height: 668px)" },
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
+    },
     extend: {
       colors: {
         background: "#0A0A0A",
@@ -15,7 +23,7 @@ const config: Config = {
         subtle: "#71717A",
         surface: "#18181B",
         border: "#27272A",
-        "accent-cyan": "#59E7CA",
+        "accent-cyan": "#DD00F2",
         "accent-orange": "#FA5D29",
       },
       fontFamily: {

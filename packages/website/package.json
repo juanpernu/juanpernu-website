@@ -24,6 +24,7 @@
     "next-mdx-remote": "^5.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-grab": "^0.1.28",
     "rehype-pretty-code": "^0.14.0",
     "remark-gfm": "^4.0.0",
     "shiki": "^1.24.0",

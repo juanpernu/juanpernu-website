@@ -10,3 +10,29 @@
     @apply bg-background text-foreground;
   }
 }
+
+/*
+ * Force Spline's internal wrapper divs to fill their container.
+ * Without this, the library's auto-generated wrappers have no explicit
+ * sizing, causing a layout shift when the canvas loads and gets
+ * manually resized via JS. This CSS approach prevents the glitch
+ * entirely — no post-load DOM manipulation needed.
+ */
+[data-spline-wrapper] > div,
+[data-spline-wrapper] > div > div,
+[data-spline-wrapper] > div > div > div,
+[data-spline-wrapper] > div > div > div > div {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+[data-spline-wrapper] canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  pointer-events: none !important;
+}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Outfit, Rubik } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { siteConfig } from "@/lib/constants";
 
@@ -55,6 +55,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
+      <head>
+        {/* Early connection to Spline CDN for faster 3D scene download */}
+        <link rel="preconnect" href="https://prod.spline.design" />
+        <link rel="dns-prefetch" href="https://prod.spline.design" />
+        {process.env.NODE_ENV === "development" && (
+          <Script
+            src="//unpkg.com/react-grab/dist/index.global.js"
+            crossOrigin="anonymous"
+            strategy="beforeInteractive"
+          />
+        )}
+      </head>
       <body
         className={`${outfit.variable} ${rubik.variable} font-body antialiased bg-background text-foreground`}
       >
@@ -74,7 +86,6 @@ export default function RootLayout({
             }),
           }}
         />
-        <Header />
         {children}
         <Footer />
       </body>

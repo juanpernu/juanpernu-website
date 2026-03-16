@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
@@ -85,71 +86,123 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   };
 
   return (
-    <main className="mx-auto max-w-3xl px-6 pt-32 pb-24">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <header className="mb-10">
-        <h1 className="font-heading text-3xl font-bold leading-tight md:text-4xl">
-          {post.frontmatter.title}
-        </h1>
-        <div className="mt-3 flex items-center gap-3 text-sm text-subtle">
-          <time dateTime={post.frontmatter.date}>
+    <main className="relative min-h-screen overflow-hidden">
+      {/* Circuit-board background */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03]">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="circuit-post" x="0" y="0" width="160" height="160" patternUnits="userSpaceOnUse">
+              <line x1="0" y1="0" x2="0" y2="160" stroke="#fafafa" strokeWidth="0.5" />
+              <line x1="80" y1="0" x2="80" y2="160" stroke="#fafafa" strokeWidth="0.5" />
+              <line x1="160" y1="0" x2="160" y2="160" stroke="#fafafa" strokeWidth="0.5" />
+              <line x1="0" y1="0" x2="160" y2="0" stroke="#fafafa" strokeWidth="0.5" />
+              <line x1="0" y1="80" x2="160" y2="80" stroke="#fafafa" strokeWidth="0.5" />
+              <rect x="20" y="20" width="40" height="40" fill="none" stroke="#fafafa" strokeWidth="0.5" />
+              <rect x="100" y="100" width="30" height="30" fill="none" stroke="#fafafa" strokeWidth="0.5" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#circuit-post)" />
+        </svg>
+      </div>
+
+      <div className="relative z-10 px-8 md:px-16 pt-32 pb-24">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+
+        {/* Nav bar */}
+        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 md:px-16 py-5 bg-background/80 backdrop-blur-sm border-b border-border/30">
+          <Link
+            href="/blog"
+            className="font-mono text-sm uppercase tracking-wider text-foreground hover:text-accent-cyan transition-colors duration-200"
+          >
+            &#x2190; Blog
+          </Link>
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-subtle">
+            Article
+          </span>
+        </nav>
+
+        {/* Post header */}
+        <header className="mb-16 max-w-3xl mx-auto">
+          <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.3em] text-subtle">
             {new Date(post.frontmatter.date).toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
               day: "numeric",
             })}
-          </time>
-          <span>&middot;</span>
-          <span>{post.readingTime} min read</span>
-          <span>&middot;</span>
-          <span>{siteConfig.author}</span>
-        </div>
-        {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
-          <div className="mt-3 flex flex-wrap gap-2">
-            {post.frontmatter.tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded bg-surface px-2 py-0.5 text-xs text-subtle"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
-      </header>
-      <article className="prose-custom">
-        <MDXRemote
-          source={post.content}
-          components={mdxComponents}
-          options={{
-            mdxOptions: {
-              remarkPlugins: [remarkGfm],
-              rehypePlugins: [
-                [
-                  rehypePrettyCode,
-                  {
-                    theme: "github-dark-dimmed",
-                    keepBackground: true,
-                  },
+            {post.readingTime && (
+              <span> &mdash; {post.readingTime} min read</span>
+            )}
+          </p>
+          <h1 className="font-heading text-2xl sm:text-3xl font-bold italic leading-tight md:text-4xl lg:text-5xl uppercase tracking-tight mb-4 break-words">
+            {post.frontmatter.title}
+          </h1>
+          <p className="font-mono text-sm text-muted uppercase tracking-wider">
+            {post.frontmatter.description}
+          </p>
+          {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
+            <div className="mt-4 flex flex-wrap gap-2">
+              {post.frontmatter.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="font-mono text-[10px] uppercase tracking-wider text-subtle border border-border/50 px-3 py-1"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+          <div className="mt-8 w-full h-px bg-border/40" />
+        </header>
+
+        {/* Post body */}
+        <article className="prose-custom max-w-3xl mx-auto">
+          <MDXRemote
+            source={post.content}
+            components={mdxComponents}
+            options={{
+              mdxOptions: {
+                remarkPlugins: [remarkGfm],
+                rehypePlugins: [
+                  [
+                    rehypePrettyCode,
+                    {
+                      theme: "github-dark-dimmed",
+                      keepBackground: true,
+                    },
+                  ],
                 ],
-              ],
-            },
-          }}
-        />
-      </article>
-      <footer className="mt-16 border-t border-border pt-8">
-        <p className="font-heading font-bold text-foreground">
-          {siteConfig.author}
-        </p>
-        <p className="text-sm text-muted mt-1">
-          Software engineer specializing in web architecture, Next.js, and
-          TypeScript. Writing about building products and the craft of software
-          engineering.
-        </p>
-      </footer>
+              },
+            }}
+          />
+        </article>
+
+        {/* Post footer */}
+        <footer className="max-w-3xl mx-auto mt-20">
+          <div className="w-full h-px bg-border/40 mb-8" />
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="font-mono text-base font-bold uppercase tracking-wider text-foreground">
+                {siteConfig.author}
+              </p>
+              <p className="font-mono text-xs text-muted uppercase tracking-wider mt-1">
+                Software engineer &mdash; Buenos Aires, Argentina
+              </p>
+            </div>
+            <Link
+              href="/blog"
+              className="group inline-flex items-center gap-2 font-mono text-sm uppercase tracking-wider text-foreground hover:text-accent-cyan transition-colors duration-200"
+            >
+              <span>All posts</span>
+              <span className="inline-block text-accent-cyan transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                &#x2197;
+              </span>
+            </Link>
+          </div>
+        </footer>
+      </div>
     </main>
   );
 }

@@ -43,7 +43,7 @@ export const mdxComponents: MDXComponents = {
   ),
   code: (props) => (
     <code
-      className="rounded bg-surface px-1.5 py-0.5 text-sm text-foreground font-mono"
+      className="rounded bg-surface px-1.5 py-0.5 text-sm text-foreground font-mono break-words"
       {...props}
     />
   ),
