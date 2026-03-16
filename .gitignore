@@ -1,3 +1,50 @@
 node_modules/
-.nx/cache
 .DS_Store
+
+# Next.js
+.next
+out
+
+# Build
+storybook-static
+
+# AI tools
+.adal/
+.agent/
+.agents/
+.augment/
+.cline/
+.codebuddy/
+.commandcode/
+.continue/
+.crush/
+.cursor/
+.factory/
+.goose/
+.iflow/
+.junie/
+.kilocode/
+.kiro/
+.kode/
+.mcpjam/
+.mux/
+.neovate/
+.openhands/
+.pi/
+.pochi/
+.qoder/
+.qwen/
+.roo/
+.superpowers/
+.trae/
+.vibe/
+.windsurf/
+.zencoder/
+skills/
+
+# Prettier
+.prettierignore
+.prettierrc
+
+# Env
+.env*.local

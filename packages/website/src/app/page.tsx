@@ -1,13 +1,38 @@
-import { Navigation } from "@/components/dock";
-import { Background } from "@/components/background";
+import { Hero } from "@/components/home/hero";
+import { LatestPosts } from "@/components/home/latest-posts";
+import { socialLinks, siteConfig } from "@/lib/constants";
 
 export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: siteConfig.name,
+    url: siteConfig.url,
+    jobTitle: "Software Engineer",
+    description:
+      "Software engineer specializing in web architecture, Next.js, TypeScript, and building scalable products.",
+    knowsAbout: [
+      "Software Architecture",
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Node.js",
+      "Web Development",
+    ],
+    sameAs: socialLinks
+      .filter((l) => l.icon !== "mail")
+      .map((l) => l.url),
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Navigation />
-      </main>
-      <Background />
-    </div>
+    <main className="w-full overflow-x-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Hero />
+      <LatestPosts />
+      {/* Contact section removed — merged into footer */}
+    </main>
   );
 }

@@ -1,9 +1,6 @@
 {
   "name": "root",
   "private": true,
-  "scripts": {
-    "publish": "lerna publish from-package --no-private"
-  },
   "workspaces": [
     "packages/*"
   ],
@@ -11,8 +8,13 @@
     "type": "git",
     "url": "https://github.com/juanpernu/juanpernu-website.git"
   },
-  "dependencies": {},
   "devDependencies": {
-    "lerna": "^8.1.9"
+    "@playwright/test": "^1.58.2",
+    "prettier": "^2.6.2",
+    "typescript": "~5.5.2"
+  },
+  "dependencies": {
+    "@splinetool/react-spline": "^4.1.0",
+    "@splinetool/runtime": "^1.12.69"
   }
 }
