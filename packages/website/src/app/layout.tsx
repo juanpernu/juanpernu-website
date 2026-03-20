@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Outfit, Rubik } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { Footer } from "@/components/layout/footer";
 import { siteConfig } from "@/lib/constants";
@@ -87,6 +88,7 @@ export default function RootLayout({
           }}
         />
         {children}
+        <Analytics />
         <Footer />
       </body>
     </html>
