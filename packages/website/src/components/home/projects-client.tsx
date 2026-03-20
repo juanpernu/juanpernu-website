@@ -206,12 +206,6 @@ function ProjectCard({
     [onOpen, project.id],
   );
 
-  const positionStyle: React.CSSProperties = {
-    left: project.position.left,
-    right: project.position.right,
-    top: project.position.top,
-  };
-
   return (
     <div
       ref={(node) => {
@@ -223,12 +217,14 @@ function ProjectCard({
       role="button"
       tabIndex={0}
       aria-label={`Open ${project.title} details`}
-      className="absolute cursor-grab select-none hover:z-10 active:cursor-grabbing md:absolute md:flex-none
-                 max-md:relative max-md:!left-auto max-md:!right-auto max-md:!top-auto"
+      className="cursor-grab select-none hover:z-10 active:cursor-grabbing
+                 max-md:relative md:absolute"
       style={{
-        ...positionStyle,
+        "--card-left": project.position.left ?? "auto",
+        "--card-right": project.position.right ?? "auto",
+        "--card-top": project.position.top ?? "auto",
         transition: "transform 0.2s",
-      }}
+      } as React.CSSProperties}
       onMouseDown={onMouseDown}
       onTouchStart={onTouchStart}
       onClick={handleClick}

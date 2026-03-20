@@ -37,6 +37,15 @@
   pointer-events: none !important;
 }
 
+/* Project card positioning — only apply on desktop (md+) */
+@media (min-width: 768px) {
+  [role="button"][style*="--card-left"] {
+    left: var(--card-left);
+    right: var(--card-right);
+    top: var(--card-top);
+  }
+}
+
 /* Projects section animations */
 @keyframes gradientShift {
   0% { background-position: 0% 50%; }
