@@ -294,7 +294,7 @@ function SlideOver({
         {/* Left: text panel */}
         <div
           className="w-[45%] max-md:w-full p-12 flex flex-col justify-center relative"
-          style={{ background: project.slideoverBg }}
+          style={{ background: "#0A0A0A" }}
         >
           {/* Close */}
           <button
@@ -339,14 +339,14 @@ function SlideOver({
           {project.images.map((img) => (
             <div
               key={img.src}
-              className={`relative bg-surface overflow-hidden ${img.full ? "col-span-2" : ""}`}
+              className={`relative bg-white overflow-hidden ${img.full ? "col-span-2" : ""}`}
             >
               <Image
                 src={img.src}
                 alt={img.alt}
                 fill
                 sizes={img.full ? "55vw" : "27.5vw"}
-                className="object-cover"
+                className="object-contain p-4"
               />
             </div>
           ))}

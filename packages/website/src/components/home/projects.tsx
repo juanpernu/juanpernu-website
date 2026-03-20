@@ -31,7 +31,7 @@ export function Projects() {
             className="block font-bold italic uppercase"
             style={{
               fontFamily: "Georgia, serif",
-              fontSize: "clamp(120px, 20vw, 286px)",
+              fontSize: "clamp(132px, 22vw, 315px)",
               lineHeight: 0.9,
               color: "transparent",
               backgroundImage: "radial-gradient(circle 8rem, #DD00F2, #1a1a1a)",
@@ -52,7 +52,7 @@ export function Projects() {
             className="block font-bold italic uppercase"
             style={{
               fontFamily: "Georgia, serif",
-              fontSize: "clamp(120px, 20vw, 286px)",
+              fontSize: "clamp(132px, 22vw, 315px)",
               lineHeight: 0.9,
               color: "transparent",
               backgroundImage: "radial-gradient(circle 8rem, #DD00F2, #1a1a1a)",

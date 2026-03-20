@@ -41,7 +41,7 @@ export const projects: Project[] = [
       { src: "/projects/iangela2.png", alt: "iAngela chat interface" },
       { src: "/projects/iangela3.png", alt: "iAngela features" },
     ],
-    position: { left: "18%", top: "40px" },
+    position: { left: "30%", top: "70px" },
   },
   {
     id: "bilog",
@@ -61,6 +61,6 @@ export const projects: Project[] = [
       { src: "/projects/bilog5.png", alt: "Bilog estadísticas y facturación" },
       { src: "/projects/bilog3.png", alt: "Bilog turno agendado mobile" },
     ],
-    position: { right: "22%", top: "120px" },
+    position: { left: "52%", top: "70px" },
   },
 ];
