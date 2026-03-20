@@ -85,7 +85,7 @@ const PixelLoader = memo(function PixelLoader() {
   );
 });
 
-export function FloatingShape() {
+export const FloatingShape = memo(function FloatingShape() {
   const [loaded, setLoaded] = useState(false);
 
   const onLoad = useCallback((splineApp: Application) => {
@@ -134,4 +134,4 @@ export function FloatingShape() {
       </div>
     </div>
   );
-}
+});
