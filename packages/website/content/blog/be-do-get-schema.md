@@ -1,7 +1,7 @@
 ---
 title: El esquema Be-Do-Get en la era IA
 date: 2026-03-20
-description: La IA como vehículo de transformación de la identidad
+description: La IA como vehículo de transformación
 tags:
   - tech
   - ia
