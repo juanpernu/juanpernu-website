@@ -3,9 +3,12 @@ import { projects } from "@/lib/projects";
 
 export function Projects() {
   return (
-    <section className="relative w-full py-16 md:py-32 overflow-hidden">
+    <section
+      className="relative w-full py-16 md:py-32 overflow-hidden"
+      style={{ contentVisibility: "auto", containIntrinsicSize: "0 800px" }}
+    >
       {/* Circuit-board background */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03]">
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03]" aria-hidden="true">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="circuit-projects" x="0" y="0" width="160" height="160" patternUnits="userSpaceOnUse">
@@ -101,7 +104,7 @@ export function Projects() {
         <div className="relative z-[2] text-center border-t border-border/50 pt-5 mt-8 font-mono text-[10px] uppercase tracking-[0.15em] text-subtle leading-loose">
           {projects.map((p) => (
             <span key={p.id} className="mx-4">
-              {p.number}.{p.title.split(" — ")[0]} &mdash; {p.title.split(" — ")[1]}
+              {p.number}.{p.shortName} &mdash; {p.title.split(" — ")[1]}
             </span>
           ))}
         </div>

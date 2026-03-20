@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Project } from "@/lib/projects";
 
 /* ------------------------------------------------------------------ */
@@ -9,34 +9,6 @@ import type { Project } from "@/lib/projects";
 /* ------------------------------------------------------------------ */
 const NOISE_URL =
   'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\' opacity=\'0.4\'/%3E%3C/svg%3E")';
-
-/* ------------------------------------------------------------------ */
-/*  CSS keyframes injected once                                        */
-/* ------------------------------------------------------------------ */
-const KEYFRAMES_ID = "projects-client-keyframes";
-
-function ensureKeyframes() {
-  if (typeof document === "undefined") return;
-  if (document.getElementById(KEYFRAMES_ID)) return;
-  const style = document.createElement("style");
-  style.id = KEYFRAMES_ID;
-  style.textContent = `
-    @keyframes gradientShift {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    @keyframes glowShift {
-      0%   { opacity: 0.6; }
-      100% { opacity: 1; }
-    }
-    @keyframes slideIn {
-      from { transform: translateY(20px); opacity: 0; }
-      to   { transform: translateY(0); opacity: 1; }
-    }
-  `;
-  document.head.appendChild(style);
-}
 
 /* ------------------------------------------------------------------ */
 /*  Card content renderers                                             */
@@ -91,22 +63,41 @@ function CardContent({ project }: { project: Project }) {
 function ProjectCard({
   project,
   onOpen,
+  triggerRef,
 }: {
   project: Project;
   onOpen: (id: string) => void;
+  triggerRef: React.RefObject<HTMLDivElement | null>;
 }) {
   const itemRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
   const hasMoved = useRef(false);
   const startPos = useRef({ x: 0, y: 0 });
+  const dragDelta = useRef({ x: 0, y: 0 });
+  const dragEndedAt = useRef(0);
 
-  const gradientBg = `linear-gradient(135deg, ${project.gradient.colors.join(", ")})`;
-  const glowBg = `radial-gradient(ellipse at 30% 20%, ${project.gradient.colors[1]}66 0%, transparent 60%),
-                   radial-gradient(ellipse at 70% 80%, ${project.gradient.colors[2]}80 0%, transparent 60%)`;
+  const gradientStyle = useMemo<React.CSSProperties>(
+    () => ({
+      background: `linear-gradient(135deg, ${project.gradient.colors.join(", ")})`,
+      backgroundSize: "300% 300%",
+      animation: "gradientShift 6s ease infinite",
+      "--hover-border": project.gradient.borderHover,
+    } as React.CSSProperties),
+    [project.gradient.colors, project.gradient.borderHover],
+  );
+
+  const glowStyle = useMemo<React.CSSProperties>(
+    () => ({
+      background: `radial-gradient(ellipse at 30% 20%, ${project.gradient.colors[1]}66 0%, transparent 60%),
+                   radial-gradient(ellipse at 70% 80%, ${project.gradient.colors[2]}80 0%, transparent 60%)`,
+      animation: "glowShift 4s ease-in-out infinite alternate",
+    }),
+    [project.gradient.colors],
+  );
 
   /* --- Mouse drag --- */
   const onMouseDown = useCallback((e: React.MouseEvent) => {
-    e.preventDefault();
+    // No e.preventDefault() — select-none handles text selection
     dragging.current = true;
     hasMoved.current = false;
     startPos.current = { x: e.clientX, y: e.clientY };
@@ -114,6 +105,7 @@ function ProjectCard({
     if (el) {
       el.style.cursor = "grabbing";
       el.style.zIndex = "20";
+      el.style.transition = "none";
     }
   }, []);
 
@@ -126,9 +118,9 @@ function ProjectCard({
       const dx = e.clientX - startPos.current.x;
       const dy = e.clientY - startPos.current.y;
       if (Math.abs(dx) > 3 || Math.abs(dy) > 3) hasMoved.current = true;
-      el.style.left = el.offsetLeft + dx + "px";
-      el.style.top = el.offsetTop + dy + "px";
-      el.style.right = "auto";
+      dragDelta.current.x += dx;
+      dragDelta.current.y += dy;
+      el.style.transform = `translate(${dragDelta.current.x}px, ${dragDelta.current.y}px) scale(1)`;
       startPos.current = { x: e.clientX, y: e.clientY };
     };
 
@@ -137,6 +129,8 @@ function ProjectCard({
         dragging.current = false;
         el.style.cursor = "grab";
         el.style.zIndex = "";
+        el.style.transition = "transform 0.2s";
+        el.style.transform = `translate(${dragDelta.current.x}px, ${dragDelta.current.y}px) scale(1)`;
       }
     };
 
@@ -155,7 +149,10 @@ function ProjectCard({
     const touch = e.touches[0];
     startPos.current = { x: touch.clientX, y: touch.clientY };
     const el = itemRef.current;
-    if (el) el.style.zIndex = "20";
+    if (el) {
+      el.style.zIndex = "20";
+      el.style.transition = "none";
+    }
   }, []);
 
   useEffect(() => {
@@ -164,24 +161,28 @@ function ProjectCard({
 
     const onTouchMove = (e: TouchEvent) => {
       if (!dragging.current) return;
+      e.preventDefault();
       const touch = e.touches[0];
       const dx = touch.clientX - startPos.current.x;
       const dy = touch.clientY - startPos.current.y;
       if (Math.abs(dx) > 3 || Math.abs(dy) > 3) hasMoved.current = true;
-      el.style.left = el.offsetLeft + dx + "px";
-      el.style.top = el.offsetTop + dy + "px";
-      el.style.right = "auto";
+      dragDelta.current.x += dx;
+      dragDelta.current.y += dy;
+      el.style.transform = `translate(${dragDelta.current.x}px, ${dragDelta.current.y}px) scale(1)`;
       startPos.current = { x: touch.clientX, y: touch.clientY };
     };
 
     const onTouchEnd = () => {
       if (dragging.current) {
         dragging.current = false;
+        dragEndedAt.current = Date.now();
         el.style.zIndex = "";
+        el.style.transition = "transform 0.2s";
+        el.style.transform = `translate(${dragDelta.current.x}px, ${dragDelta.current.y}px) scale(1)`;
       }
     };
 
-    el.addEventListener("touchmove", onTouchMove, { passive: true });
+    el.addEventListener("touchmove", onTouchMove, { passive: false });
     el.addEventListener("touchend", onTouchEnd);
     return () => {
       el.removeEventListener("touchmove", onTouchMove);
@@ -190,10 +191,20 @@ function ProjectCard({
   }, []);
 
   const handleClick = useCallback(() => {
-    if (!hasMoved.current) {
-      onOpen(project.id);
-    }
+    if (hasMoved.current) return;
+    if (Date.now() - dragEndedAt.current < 400) return;
+    onOpen(project.id);
   }, [onOpen, project.id]);
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        onOpen(project.id);
+      }
+    },
+    [onOpen, project.id],
+  );
 
   const positionStyle: React.CSSProperties = {
     left: project.position.left,
@@ -203,13 +214,37 @@ function ProjectCard({
 
   return (
     <div
-      ref={itemRef}
-      className="absolute cursor-grab select-none transition-transform duration-200 hover:scale-105 hover:z-10 active:cursor-grabbing md:absolute md:flex-none
+      ref={(node) => {
+        (itemRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+        if (project.id && triggerRef) {
+          (triggerRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-label={`Open ${project.title} details`}
+      className="absolute cursor-grab select-none hover:z-10 active:cursor-grabbing md:absolute md:flex-none
                  max-md:relative max-md:!left-auto max-md:!right-auto max-md:!top-auto"
-      style={positionStyle}
+      style={{
+        ...positionStyle,
+        transition: "transform 0.2s",
+      }}
       onMouseDown={onMouseDown}
       onTouchStart={onTouchStart}
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      onMouseEnter={() => {
+        const el = itemRef.current;
+        if (el && !dragging.current) {
+          el.style.transform = `translate(${dragDelta.current.x}px, ${dragDelta.current.y}px) scale(1.05)`;
+        }
+      }}
+      onMouseLeave={() => {
+        const el = itemRef.current;
+        if (el && !dragging.current) {
+          el.style.transform = `translate(${dragDelta.current.x}px, ${dragDelta.current.y}px) scale(1)`;
+        }
+      }}
     >
       {/* Number label */}
       <div className="text-xs font-bold tracking-[1px] mb-1.5 text-accent-cyan">
@@ -218,19 +253,8 @@ function ProjectCard({
 
       {/* Visual box */}
       <div
-        className="relative w-[200px] h-[160px] rounded-xl overflow-hidden border border-border flex items-center justify-center flex-col gap-2 transition-colors duration-200"
-        style={{
-          background: gradientBg,
-          backgroundSize: "300% 300%",
-          animation: "gradientShift 6s ease infinite",
-        }}
-        onMouseEnter={(e) => {
-          (e.currentTarget as HTMLElement).style.borderColor =
-            project.gradient.borderHover;
-        }}
-        onMouseLeave={(e) => {
-          (e.currentTarget as HTMLElement).style.borderColor = "";
-        }}
+        className="relative w-[200px] h-[160px] rounded-xl overflow-hidden border border-border hover:border-[var(--hover-border)] flex items-center justify-center flex-col gap-2 transition-colors duration-200"
+        style={gradientStyle}
       >
         {/* Grain overlay */}
         <div
@@ -245,10 +269,7 @@ function ProjectCard({
         {/* Glow overlay */}
         <div
           className="absolute inset-0 rounded-xl pointer-events-none"
-          style={{
-            background: glowBg,
-            animation: "glowShift 4s ease-in-out infinite alternate",
-          }}
+          style={glowStyle}
         />
         {/* Card content */}
         <CardContent project={project} />
@@ -273,6 +294,13 @@ function SlideOver({
 }) {
   const activeIdx = projects.findIndex((p) => p.id === activeId);
   const project = projects[activeIdx];
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  // Focus close button on open
+  useEffect(() => {
+    closeRef.current?.focus();
+  }, [activeId]);
+
   if (!project) return null;
 
   const hasPrev = activeIdx > 0;
@@ -281,23 +309,27 @@ function SlideOver({
   return (
     <div
       className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-stretch"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={`project-title-${project.id}`}
     >
+      {/* Backdrop hit area */}
+      <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
+
       {/* Panel */}
       <div
-        className="flex w-full h-full max-md:flex-col max-md:overflow-y-auto"
+        className="relative flex w-full h-full max-md:flex-col max-md:overflow-y-auto"
         style={{ animation: "slideIn 0.4s ease" }}
         key={project.id}
       >
         {/* Left: text panel */}
         <div
           className="w-[45%] max-md:w-full p-12 flex flex-col justify-center relative"
-          style={{ background: "#0A0A0A" }}
+          style={{ background: project.slideoverBg }}
         >
           {/* Close */}
           <button
+            ref={closeRef}
             onClick={onClose}
             className="absolute top-6 right-6 w-8 h-8 border border-white/20 rounded text-white text-base flex items-center justify-center bg-transparent cursor-pointer transition-colors duration-200 hover:border-accent-cyan"
           >
@@ -307,7 +339,10 @@ function SlideOver({
           <div className="text-[13px] text-accent-cyan tracking-[2px] mb-4">
             {project.number}.
           </div>
-          <h2 className="font-serif text-4xl font-bold leading-tight mb-6">
+          <h2
+            id={`project-title-${project.id}`}
+            className="font-serif text-4xl font-bold leading-tight mb-6"
+          >
             {project.title}
           </h2>
           <div className="w-full h-px bg-white/20 mb-6" />
@@ -345,7 +380,7 @@ function SlideOver({
                 src={img.src}
                 alt={img.alt}
                 fill
-                sizes={img.full ? "55vw" : "27.5vw"}
+                sizes={img.full ? "(max-width: 768px) 100vw, 55vw" : "(max-width: 768px) 50vw, 27.5vw"}
                 className="object-contain p-4"
               />
             </div>
@@ -353,14 +388,14 @@ function SlideOver({
         </div>
       </div>
 
-      {/* Navigation arrows */}
+      {/* Navigation arrows — hidden on mobile */}
       {hasPrev && (
         <button
           onClick={(e) => {
             e.stopPropagation();
             onNavigate(projects[activeIdx - 1].id);
           }}
-          className="fixed left-5 top-1/2 -translate-y-1/2 w-12 h-12 bg-surface border border-border rounded-full text-white text-xl flex items-center justify-center cursor-pointer z-[110] transition-colors duration-200 hover:border-accent-cyan"
+          className="fixed left-5 top-1/2 -translate-y-1/2 w-12 h-12 bg-surface border border-border rounded-full text-white text-xl flex items-center justify-center cursor-pointer z-[110] transition-colors duration-200 hover:border-accent-cyan max-md:hidden"
         >
           &#x2039;
         </button>
@@ -371,7 +406,7 @@ function SlideOver({
             e.stopPropagation();
             onNavigate(projects[activeIdx + 1].id);
           }}
-          className="fixed right-5 top-1/2 -translate-y-1/2 w-12 h-12 bg-surface border border-border rounded-full text-white text-xl flex items-center justify-center cursor-pointer z-[110] transition-colors duration-200 hover:border-accent-cyan"
+          className="fixed right-5 top-1/2 -translate-y-1/2 w-12 h-12 bg-surface border border-border rounded-full text-white text-xl flex items-center justify-center cursor-pointer z-[110] transition-colors duration-200 hover:border-accent-cyan max-md:hidden"
         >
           &#x203A;
         </button>
@@ -385,11 +420,14 @@ function SlideOver({
 /* ------------------------------------------------------------------ */
 export function ProjectsClient({ projects }: { projects: Project[] }) {
   const [activeProject, setActiveProject] = useState<string | null>(null);
+  const triggerRefs = useRef<Map<string, React.RefObject<HTMLDivElement | null>>>(new Map());
 
-  // Inject keyframes on mount
-  useEffect(() => {
-    ensureKeyframes();
-  }, []);
+  // Ensure each project has a stable trigger ref
+  for (const p of projects) {
+    if (!triggerRefs.current.has(p.id)) {
+      triggerRefs.current.set(p.id, { current: null });
+    }
+  }
 
   // Close on ESC
   useEffect(() => {
@@ -404,6 +442,17 @@ export function ProjectsClient({ projects }: { projects: Project[] }) {
     setActiveProject(id);
   }, []);
 
+  const handleClose = useCallback(() => {
+    setActiveProject((prev) => {
+      // Return focus to the triggering card
+      if (prev) {
+        const ref = triggerRefs.current.get(prev);
+        requestAnimationFrame(() => ref?.current?.focus());
+      }
+      return null;
+    });
+  }, []);
+
   return (
     <>
       {/* Canvas area */}
@@ -413,6 +462,7 @@ export function ProjectsClient({ projects }: { projects: Project[] }) {
             key={project.id}
             project={project}
             onOpen={handleOpen}
+            triggerRef={triggerRefs.current.get(project.id)!}
           />
         ))}
       </div>
@@ -422,7 +472,7 @@ export function ProjectsClient({ projects }: { projects: Project[] }) {
         <SlideOver
           projects={projects}
           activeId={activeProject}
-          onClose={() => setActiveProject(null)}
+          onClose={handleClose}
           onNavigate={handleOpen}
         />
       )}

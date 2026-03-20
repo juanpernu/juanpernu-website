@@ -5,7 +5,7 @@ export interface ProjectImage {
 }
 
 export interface ProjectGradient {
-  colors: string[];
+  colors: [string, string, string];
   borderHover: string;
 }
 
@@ -13,6 +13,7 @@ export interface Project {
   id: string;
   number: string;
   title: string;
+  shortName: string;
   description: string;
   techStack: string[];
   url: string;
@@ -27,6 +28,7 @@ export const projects: Project[] = [
     id: "iangela",
     number: "01",
     title: "iAngela — AI Virtual Assistant",
+    shortName: "iAngela",
     description:
       "Asistente virtual con inteligencia artificial para clínicas odontológicas. Gestión de turnos, pacientes y consultas con interacción por voz y texto, integrado con el ecosistema Bilog.",
     techStack: ["AI", "NLP", "Voice", "Astro", "Claude API"],
@@ -47,6 +49,7 @@ export const projects: Project[] = [
     id: "bilog",
     number: "02",
     title: "Bilog — Dental Tech Ecosystem",
+    shortName: "Bilog",
     description:
       "Ecosistema tecnológico integral para clínicas y consultorios odontológicos. Software de gestión, historia clínica digital, facturación y herramientas de productividad para profesionales de la salud.",
     techStack: ["React", "Node.js", "AWS", "PostgreSQL"],
