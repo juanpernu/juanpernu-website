@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useCallback, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import Spline from "@splinetool/react-spline";
 import type { Application } from "@splinetool/runtime";
 
@@ -87,6 +87,19 @@ const PixelLoader = memo(function PixelLoader() {
 
 export const FloatingShape = memo(function FloatingShape() {
   const [loaded, setLoaded] = useState(false);
+  /**
+   * Skip Spline on mobile (< lg = 1024px).
+   * WebGL is too heavy for mobile GPUs — iOS Safari aggressively reclaims
+   * the GL context causing scene reloads that look like re-renders.
+   * The circuit background + concentric rings provide sufficient visual texture.
+   *
+   * Start as `false` (safe for SSR/hydration), flip once on client.
+   */
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    setIsDesktop(window.matchMedia("(min-width: 1024px)").matches);
+  }, []);
 
   const onLoad = useCallback((splineApp: Application) => {
     // Hide the Spline watermark logo
@@ -105,6 +118,9 @@ export const FloatingShape = memo(function FloatingShape() {
       setLoaded(true);
     });
   }, []);
+
+  // Mobile: skip WebGL entirely — circuit + rings background is sufficient
+  if (!isDesktop) return null;
 
   return (
     <div className="absolute inset-0 w-full h-full">
