@@ -175,7 +175,7 @@ function ProjectCard({
     const onTouchEnd = () => {
       if (dragging.current) {
         dragging.current = false;
-        dragEndedAt.current = Date.now();
+        if (hasMoved.current) dragEndedAt.current = Date.now();
         el.style.zIndex = "";
         el.style.transition = "transform 0.2s";
         el.style.transform = `translate(${dragDelta.current.x}px, ${dragDelta.current.y}px) scale(1)`;
