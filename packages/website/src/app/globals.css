@@ -36,3 +36,34 @@
   object-fit: cover !important;
   pointer-events: none !important;
 }
+
+/* Project card positioning — only apply on desktop (md+) */
+@media (min-width: 768px) {
+  [role="button"][style*="--card-left"] {
+    left: var(--card-left);
+    right: var(--card-right);
+    top: var(--card-top);
+  }
+}
+
+/* Projects section animations */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes txt_shine {
+  0% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+@keyframes glowShift {
+  0% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

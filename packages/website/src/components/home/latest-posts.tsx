@@ -35,7 +35,7 @@ export async function LatestPosts() {
         {/* Section title — large decorative */}
         <div className="mb-10 md:mb-20 text-left md:text-right pr-0 md:pr-[20%]">
           <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.3em] text-subtle">
-            02 &mdash; Writing
+            03 &mdash; Writing
           </p>
           <h2 className="font-heading text-4xl font-bold italic md:text-5xl lg:text-6xl uppercase tracking-tight">
             Latest{" "}

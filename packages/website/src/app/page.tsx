@@ -1,4 +1,5 @@
 import { Hero } from "@/components/home/hero";
+import { Projects } from "@/components/home/projects";
 import { LatestPosts } from "@/components/home/latest-posts";
 import { socialLinks, siteConfig } from "@/lib/constants";
 
@@ -31,6 +32,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Hero />
+      <Projects />
       <LatestPosts />
       {/* Contact section removed — merged into footer */}
     </main>
