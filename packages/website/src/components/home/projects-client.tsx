@@ -75,6 +75,8 @@ function ProjectCard({
   const startPos = useRef({ x: 0, y: 0 });
   const dragDelta = useRef({ x: 0, y: 0 });
   const dragEndedAt = useRef(0);
+  const onOpenRef = useRef(onOpen);
+  onOpenRef.current = onOpen;
 
   const gradientStyle = useMemo<React.CSSProperties>(
     () => ({
@@ -174,8 +176,15 @@ function ProjectCard({
 
     const onTouchEnd = () => {
       if (dragging.current) {
+        const wasDrag = hasMoved.current;
         dragging.current = false;
-        if (hasMoved.current) dragEndedAt.current = Date.now();
+        if (wasDrag) {
+          dragEndedAt.current = Date.now();
+        } else {
+          // Tap without movement — open directly instead of relying on
+          // synthetic click (which Safari iOS doesn't fire on non-anchor divs)
+          onOpenRef.current(project.id);
+        }
         el.style.zIndex = "";
         el.style.transition = "transform 0.2s";
         el.style.transform = `translate(${dragDelta.current.x}px, ${dragDelta.current.y}px) scale(1)`;
