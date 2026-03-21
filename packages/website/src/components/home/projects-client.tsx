@@ -329,7 +329,7 @@ function SlideOver({
       >
         {/* Left: text panel */}
         <div
-          className="w-[45%] max-md:w-full p-12 flex flex-col justify-center relative"
+          className="w-[45%] max-md:w-full max-md:min-h-full p-12 max-md:p-8 flex flex-col justify-center relative"
           style={{ background: project.slideoverBg }}
         >
           {/* Close */}
@@ -374,8 +374,8 @@ function SlideOver({
           </a>
         </div>
 
-        {/* Right: image grid */}
-        <div className="w-[55%] max-md:w-full grid grid-cols-2 grid-rows-2 gap-0.5 max-md:min-h-[400px]">
+        {/* Right: image grid — hidden on mobile */}
+        <div className="w-[55%] max-md:hidden grid grid-cols-2 grid-rows-2 gap-0.5">
           {project.images.map((img) => (
             <div
               key={img.src}
@@ -385,7 +385,7 @@ function SlideOver({
                 src={img.src}
                 alt={img.alt}
                 fill
-                sizes={img.full ? "(max-width: 768px) 100vw, 55vw" : "(max-width: 768px) 50vw, 27.5vw"}
+                sizes="55vw"
                 className="object-contain p-4"
               />
             </div>
