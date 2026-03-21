@@ -318,12 +318,12 @@ function SlideOver({
       aria-modal="true"
       aria-labelledby={`project-title-${project.id}`}
     >
-      {/* Backdrop hit area */}
-      <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
+      {/* Backdrop hit area — z-0 so panel content stays above */}
+      <div className="absolute inset-0 z-0" onClick={onClose} aria-hidden="true" />
 
-      {/* Panel */}
+      {/* Panel — z-10 to stay above backdrop */}
       <div
-        className="relative flex w-full h-full max-md:flex-col max-md:overflow-y-auto"
+        className="relative z-10 flex w-full h-full max-md:flex-col max-md:overflow-y-auto"
         style={{ animation: "slideIn 0.4s ease" }}
         key={project.id}
       >
@@ -335,8 +335,9 @@ function SlideOver({
           {/* Close */}
           <button
             ref={closeRef}
-            onClick={onClose}
-            className="absolute top-6 right-6 w-8 h-8 border border-white/20 rounded text-white text-base flex items-center justify-center bg-transparent cursor-pointer transition-colors duration-200 hover:border-accent-cyan"
+            onClick={(e) => { e.stopPropagation(); onClose(); }}
+            onTouchEnd={(e) => { e.stopPropagation(); e.preventDefault(); onClose(); }}
+            className="absolute top-6 right-6 z-20 w-10 h-10 border border-white/20 rounded text-white text-lg flex items-center justify-center bg-black/50 cursor-pointer transition-colors duration-200 hover:border-accent-cyan"
           >
             &times;
           </button>
