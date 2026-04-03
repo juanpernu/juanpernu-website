@@ -1,6 +1,6 @@
 ---
 title: El famoso Weekend Project
-date: 2026-03-20
+date: 2026-04-03
 description: ¿Es la creatividad la plataforma de la innovación?
 tags:
   - tech
@@ -21,9 +21,7 @@ Si este post despierta tu creatividad, ya estoy hecho. Y para eso te voy a conta
 ## El famoso "Weekend Project"
 Si nunca escuchaste este concepto, básicamente es el hobby que uno tiene de fines de semana: hacer cerámica, jugar al paddle, carpintería, lo que te guste. Y bueno, obviamente que mi hobby es la tecnología como buen nerd.
 
-Seguramente viste esta película y si no la viste, por lo menos, mirá este video que es genial: 
-
-[🎬 Ver el clip de la película](https://www.youtube.com/watch?v=T_3AjPZSlTU)
+Seguramente viste esta película y si no la viste, por lo menos, mirá este video que es genial: [Wake up, daddy's home](https://www.youtube.com/watch?v=T_3AjPZSlTU)
 
 Bueno, primero voy a decir: no, no es lo del aplauso. Eso ya está inventado hace rato. Pero qué bueno estaría poder manejar la compu con las manos, ¿no? Claro, a eso mismo me refiero y por eso hace algunos findes ya, vengo trabajando en esto.
 ![Hand tracking app](/blog/images/weekend-project-hand-tracking.png)
@@ -48,7 +46,7 @@ En el proyecto de [iAngela que desarrollé para Bilog](https://ai.bilog.com.ar) 
 ¿Conclusión? Este post creo que no tiene ninguna más que tratar de decirte que si hay algo que te despierta la creatividad de alguna forma parecida a lo que me sucede a mí y tenés la posibilidad de hacerlo, es por ahí.
 
 Acá te dejo un video de mí, bien disociado, donde te muestro un poco lo que hace lo que estoy armando, las posibilidades infinitas – no hacer nada también es una opción –.
-[🎬 Ver el video demo](https://youtu.be/nGg0G4ZpSyc)
+[Ver el video demo](https://youtu.be/nGg0G4ZpSyc)
 
 Si querés que charlemos más sobre este hermoso mundo de la Matrix, ya sabés dónde encontrarme.
 

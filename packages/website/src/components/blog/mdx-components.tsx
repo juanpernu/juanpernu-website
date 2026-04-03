@@ -1,5 +1,32 @@
 import type { MDXComponents } from "mdx/types";
 
+function extractYouTubeId(url: string): string | null {
+  const patterns = [
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,
+  ];
+  for (const pattern of patterns) {
+    const match = url.match(pattern);
+    if (match) return match[1];
+  }
+  return null;
+}
+
+function YouTubeEmbed({ url }: { url: string }) {
+  const id = extractYouTubeId(url);
+  if (!id) return null;
+  return (
+    <div className="my-6 relative w-full" style={{ paddingBottom: "56.25%" }}>
+      <iframe
+        className="absolute inset-0 w-full h-full rounded-lg"
+        src={`https://www.youtube-nocookie.com/embed/${id}`}
+        title="YouTube video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+    </div>
+  );
+}
+
 export const mdxComponents: MDXComponents = {
   h1: (props) => (
     <h1
@@ -20,14 +47,20 @@ export const mdxComponents: MDXComponents = {
     />
   ),
   p: (props) => <p className="my-4 leading-7 text-muted" {...props} />,
-  a: (props) => (
-    <a
-      className="text-accent-cyan underline underline-offset-4 hover:text-accent-cyan/80 transition-colors duration-200"
-      target={props.href?.startsWith("http") ? "_blank" : undefined}
-      rel={props.href?.startsWith("http") ? "noopener noreferrer" : undefined}
-      {...props}
-    />
-  ),
+  a: (props) => {
+    const href = props.href ?? "";
+    if (href && extractYouTubeId(href)) {
+      return <YouTubeEmbed url={href} />;
+    }
+    return (
+      <a
+        className="text-accent-cyan underline underline-offset-4 hover:text-accent-cyan/80 transition-colors duration-200"
+        target={href.startsWith("http") ? "_blank" : undefined}
+        rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+        {...props}
+      />
+    );
+  },
   ul: (props) => (
     <ul className="my-4 ml-6 list-disc space-y-2 text-muted" {...props} />
   ),
