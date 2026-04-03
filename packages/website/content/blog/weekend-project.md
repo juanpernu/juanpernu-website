@@ -16,7 +16,7 @@ published: true
 
 O-HA-YO-U dice ahí arriba, por si te lo estabas preguntando. Y significa "buen día" en japonés, pero en su forma más informal, entonces derivaría más en un "hola".
 
-Hoy es jueves 02 de Abril, día memorable – y por esto mismo –, feriado. Yo aprovecho otra vez para sentarme a compartir ciertos pensamientos que tengo de vez en cuando y ver cómo intentar aplicarlos a la vida real, tratar de hacerlos útiles de alguna forma.
+Hoy es jueves 03 de Abril, feriado. Yo aprovecho otra vez para sentarme a compartir ciertos pensamientos que tengo de vez en cuando y ver cómo intentar aplicarlos a la vida real, tratar de hacerlos útiles de alguna forma.
 
 Si este post despierta tu creatividad, ya estoy hecho. Y para eso te voy a contar lo siguiente:
 
