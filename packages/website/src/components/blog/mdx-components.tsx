@@ -90,10 +90,22 @@ export const mdxComponents: MDXComponents = {
     <strong className="font-semibold text-foreground" {...props} />
   ),
   hr: () => <hr className="my-8 border-border" />,
-  img: (props) => (
+  img: (props) => {
+    const { alt, ...rest } = props as React.ImgHTMLAttributes<HTMLImageElement>;
+    if (alt) {
+      return (
+        <figure className="my-6">
+          {/* eslint-disable-next-line jsx-a11y/alt-text, @next/next/no-img-element */}
+          <img className="rounded-lg w-full" loading="lazy" alt={alt} {...rest} />
+          <figcaption className="mt-2 text-center font-mono text-[11px] text-subtle italic">
+            {alt}
+          </figcaption>
+        </figure>
+      );
+    }
     // eslint-disable-next-line jsx-a11y/alt-text, @next/next/no-img-element
-    <img className="my-6 rounded-lg" loading="lazy" {...props} />
-  ),
+    return <img className="my-6 rounded-lg" loading="lazy" alt={alt} {...rest} />;
+  },
   table: (props) => (
     <div className="my-6 overflow-x-auto">
       <table className="min-w-full border-collapse text-sm" {...props} />

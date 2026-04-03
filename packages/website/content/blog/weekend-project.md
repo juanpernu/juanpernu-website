@@ -6,7 +6,9 @@ tags:
   - tech
   - ia
   - general
-  - business
+  - hobbies
+  - hands-tracking
+  - web
 published: true
 ---
 
@@ -37,8 +39,7 @@ Me hace acordar a la época cuando recién empezaba a diseñar y programar... cu
 ## Clauding...
 Claro que todo esto lo pude hacer en tan poco tiempo (y sin conocer la tecnología, para ser honestos), gracias a Claude Code. Actualmente estoy implementando técnicas de **[orquestamiento de agentes](https://www.ibm.com/think/topics/llm-orchestration)** que me permiten armar equipos de hasta 5 *"devs"* y que cada uno de ellos se encargue de una tarea específica. Claro que la fase de planeamiento es clave para poder armar este tipo de orquestamiento de agentes tan granular y específico, pero eso lo dejamos para otro momento.
 
-![Esquema simple de arquitectura de orquestamiento](https://cdn-uploads.huggingface.co/production/uploads/63615355a46f0cdd62e707f5/b9rbnB0dX1FzZSU20xHZt.png)
-^[Esquema básico de arquitectura de orquestamiento. Fuente: https://huggingface.co/blog/alirezamsh/leeroo-multi-model-system]
+![Esquema básico de arquitectura de orquestamiento. Fuente: huggingface.co/blog/alirezamsh/leeroo-multi-model-system](https://cdn-uploads.huggingface.co/production/uploads/63615355a46f0cdd62e707f5/b9rbnB0dX1FzZSU20xHZt.png)
 
 En el proyecto de [iAngela que desarrollé para Bilog](https://ai.bilog.com.ar) se usa esta arquitectura que permite armar un pequeño swarm de agentes, cada uno con su responsabilidad atendiendo un canal de consulta específico usando ***Model Routing*** entre varias cosas más – [acá](https://medium.com/google-cloud/a-developers-guide-to-model-routing-1f21ecc34d60) te dejo un post no muy amigable sobre el concepto –.
 
