@@ -8,6 +8,17 @@ out
 # Build
 storybook-static
 
+# Claude Code local
+.claude/
+
+# Obsidian
+.obsidian/
+
+# Test artifacts
+test-results/
+playwright-report/
+*.bak/
+
 # AI tools
 .adal/
 .agent/
