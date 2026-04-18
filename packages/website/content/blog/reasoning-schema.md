@@ -36,7 +36,7 @@ Depende de lo que entendamos como "razonar". Si lo definimos como tener la capac
 
 Por ejemplo, el proceso de diseño tiene lineamientos a seguir, si bien cada uno le pone su impronta, en general seguimos procesos estandarizados. El entender y poder desmembrar esos procesos te permiten, no solamente hacerlos propios, sino también poder iterarlos para adaptarlos a la performance que necesitamos.
 
-![Diagrama del proceso de diseño y sus iteraciones](/blog/images/reasoning-schema-design-flow.png)
+![Esquema general de estructura de un proceso](/blog/images/reasoning-schema-design-flow.png)
 
 Conocer mis propios flujos o procesos de trabajo me permite, no solamente enseñarlo, sino también adaptarlo e irlo iterando para mejorar la performance de ese proceso. Conocer mis flujos de trabajo hace que cada vez se vuelva más predecible. Esto significa que, si la herramienta tiene capacidad de razonar de alguna forma, va a seguir el proceso de la forma en la que lo diseñé.
 
