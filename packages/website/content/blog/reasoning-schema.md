@@ -27,7 +27,7 @@ Ahí fue cuando le recomendé la plataforma que estoy usando para escribir este 
 Está bastante bueno, te diré. Porque, aparte de tener todas las ideas del negocio y varias cosas más, lo puedo integrar directamente con mi Claude. Hasta le desarrollé [skills](https://code.claude.com/docs/es/skills) para que interactúe con información de mi vault para tomar decisiones.
 
 Pero algo muy interesante es la vista de grafos porque te permite **ver** cómo se conectan tus ideas:
-![[Pasted image 20260418000803.png]]
+![Vista de grafos de Obsidian mostrando conexiones entre ideas](/blog/images/reasoning-schema-obsidian-graph.png)
 
 Fijate cómo se conectan algunas ideas y otras no tienen punto de contacto. A mí me sirvió para entender cómo agrupo la información y los temas de forma mental. Y esto, a su vez, me generó nuevas ideas sobre un punto que, tal vez, compartía un solo nodo de conexión. Algunos somos más visuales que otros.
 
@@ -36,7 +36,7 @@ Depende de lo que entendamos como "razonar". Si lo definimos como tener la capac
 
 Por ejemplo, el proceso de diseño tiene lineamientos a seguir, si bien cada uno le pone su impronta, en general seguimos procesos estandarizados. El entender y poder desmembrar esos procesos te permiten, no solamente hacerlos propios, sino también poder iterarlos para adaptarlos a la performance que necesitamos.
 
-![[Frame 1.png]]
+![Diagrama del proceso de diseño y sus iteraciones](/blog/images/reasoning-schema-design-flow.png)
 
 Conocer mis propios flujos o procesos de trabajo me permite, no solamente enseñarlo, sino también adaptarlo e irlo iterando para mejorar la performance de ese proceso. Conocer mis flujos de trabajo hace que cada vez se vuelva más predecible. Esto significa que, si la herramienta tiene capacidad de razonar de alguna forma, va a seguir el proceso de la forma en la que lo diseñé.
 
