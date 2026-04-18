@@ -16,5 +16,15 @@
   "dependencies": {
     "@splinetool/react-spline": "^4.1.0",
     "@splinetool/runtime": "^1.12.69"
+  },
+  "overrides": {
+    "yaml": "^2.8.3",
+    "smol-toml": "^1.6.1",
+    "flatted": "^3.4.2",
+    "anymatch": { "picomatch": "^2.3.2" },
+    "readdirp": { "picomatch": "^2.3.2" },
+    "micromatch": { "picomatch": "^2.3.2" },
+    "tinyglobby": { "picomatch": "^4.0.4" },
+    "fdir": { "picomatch": "^4.0.4" }
   }
 }
