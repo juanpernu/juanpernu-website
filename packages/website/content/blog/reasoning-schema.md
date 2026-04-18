@@ -1,6 +1,6 @@
 ---
 title: Hay que extraer la forma en la que razonamos
-date: 2026-04-15
+date: 2026-04-18
 description: Entender cómo razonás es la clave.
 tags:
   - ia
@@ -35,7 +35,9 @@ Fijate cómo se conectan algunas ideas y otras no tienen punto de contacto. A m�
 Depende de lo que entendamos como "razonar". Si lo definimos como tener la capacidad de describir los pasos que hacemos en un proceso específico, agnósticamente del tipo de proceso, podríamos decir que sí. Se puede enseñar a razonar a un LLM.
 
 Por ejemplo, el proceso de diseño tiene lineamientos a seguir, si bien cada uno le pone su impronta, en general seguimos procesos estandarizados. El entender y poder desmembrar esos procesos te permiten, no solamente hacerlos propios, sino también poder iterarlos para adaptarlos a la performance que necesitamos.
+
 ![[Frame 1.png]]
+
 Conocer mis propios flujos o procesos de trabajo me permite, no solamente enseñarlo, sino también adaptarlo e irlo iterando para mejorar la performance de ese proceso. Conocer mis flujos de trabajo hace que cada vez se vuelva más predecible. Esto significa que, si la herramienta tiene capacidad de razonar de alguna forma, va a seguir el proceso de la forma en la que lo diseñé.
 
 **El entender esto me ayudó a potenciar mi productividad hasta casi un x6.** Un poco de esto lo aplico en la arquitectura de [orquestación de agentes que te conté en mi pasado post](/blog/weekend-project).
