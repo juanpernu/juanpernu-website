@@ -1,6 +1,6 @@
 ---
 title: Session 01 - Fede Gallo Pecca
-date: 2026-05-13
+date: 2026-05-29
 description: Una charla filosófica sobre IA, retail y cómo vamos a consumir.
 tags:
   - ia
