@@ -32,6 +32,7 @@ export async function generateMetadata({
     },
     openGraph: {
       type: "article",
+      locale: "es_AR",
       title: post.frontmatter.title,
       description: post.frontmatter.description,
       url: `${siteConfig.url}/blog/${post.slug}`,
@@ -76,12 +77,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       url: siteConfig.url,
     },
     url: `${siteConfig.url}/blog/${post.slug}`,
+    image: `${siteConfig.url}/blog/${post.slug}/opengraph-image`,
     keywords: post.frontmatter.tags?.join(", "),
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${siteConfig.url}/blog/${post.slug}`,
     },
-    inLanguage: "en",
+    inLanguage: "es-AR",
     wordCount: post.content.split(/\s+/).length,
   };
 
@@ -125,12 +127,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </nav>
 
         {/* Post header */}
-        <header className="mb-16 max-w-3xl mx-auto">
+        <header lang="es" className="mb-16 max-w-3xl mx-auto">
           <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.3em] text-subtle">
             {new Date(post.frontmatter.date).toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
               day: "numeric",
+              timeZone: "UTC",
             })}
             {post.readingTime && (
               <span> &mdash; {post.readingTime} min read</span>
@@ -158,7 +161,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </header>
 
         {/* Post body */}
-        <article className="prose-custom max-w-3xl mx-auto">
+        <article lang="es" className="prose-custom max-w-3xl mx-auto">
           <MDXRemote
             source={post.content}
             components={mdxComponents}

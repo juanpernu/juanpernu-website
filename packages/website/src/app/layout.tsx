@@ -29,6 +29,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   alternates: {
     canonical: "/",
+    types: {
+      "application/rss+xml": [
+        { url: "/feed.xml", title: `${siteConfig.name} — Blog` },
+      ],
+    },
   },
   icons: {
     icon: "/favicon.ico",

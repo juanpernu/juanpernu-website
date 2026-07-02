@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllPosts } from "@/lib/blog";
 import { PostCard } from "@/components/blog/post-card";
+import { siteConfig } from "@/lib/constants";
 
 export const dynamic = "force-static";
 
@@ -16,8 +17,35 @@ export const metadata: Metadata = {
 export default async function BlogPage() {
   const posts = await getAllPosts();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: `${siteConfig.name} — Blog`,
+    url: `${siteConfig.url}/blog`,
+    description:
+      "Thoughts on software engineering, architecture, and building products.",
+    inLanguage: "es-AR",
+    author: {
+      "@type": "Person",
+      name: siteConfig.author,
+      url: siteConfig.url,
+    },
+    blogPost: posts.map((post) => ({
+      "@type": "BlogPosting",
+      headline: post.frontmatter.title,
+      description: post.frontmatter.description,
+      datePublished: post.frontmatter.date,
+      url: `${siteConfig.url}/blog/${post.slug}`,
+      inLanguage: "es-AR",
+    })),
+  };
+
   return (
     <main className="relative min-h-screen overflow-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Circuit-board background */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.03]">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">

@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Juan Pernumian",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://juanpernumian.com.ar",
   description:
-    "Juan Pernumian — software engineer writing about web architecture, Next.js, TypeScript, and building products.",
+    "Juan Pernumian — software engineer writing about AI, web architecture, Next.js, TypeScript, and building products.",
   twitterHandle: "@JuanPernu",
   author: "Juan Pernumian",
   email: "juan.pernumian@gmail.com",

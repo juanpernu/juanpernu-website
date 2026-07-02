@@ -21,6 +21,7 @@ export function PostCard({ post }: { post: Post }) {
               year: "numeric",
               month: "short",
               day: "numeric",
+              timeZone: "UTC",
             })}
             {post.readingTime && (
               <span> &middot; {post.readingTime} min read</span>
