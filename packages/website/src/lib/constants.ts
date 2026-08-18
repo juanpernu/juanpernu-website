@@ -6,6 +6,7 @@ export const siteConfig = {
   twitterHandle: "@JuanPernu",
   author: "Juan Pernumian",
   email: "juan.pernumian@gmail.com",
+  gaId: "G-7QGY6G9HD5",
 };
 
 export const navItems = [
